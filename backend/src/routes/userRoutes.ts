@@ -4,6 +4,7 @@ import {
   login,
   logout,
   refreshAccessToken,
+  searchUser,
   signUp,
 } from "../controllers/userController";
 import bearerAuth from "../middlewares/authMiddleware";
@@ -17,5 +18,6 @@ userRoutes.get("/refreshaccesstoken", refreshAccessToken);
 // protected routes
 userRoutes.post("/logout", bearerAuth, logout);
 userRoutes.get("/getcurrentuser", bearerAuth, getCurrentUser);
+userRoutes.get("/searchuser", bearerAuth, searchUser);
 
 export default userRoutes;

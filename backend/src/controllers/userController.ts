@@ -262,4 +262,42 @@ const getCurrentUser = async (c: Context<ICustomEnv>) => {
     return c.json({ error: error });
   }
 };
-export { signUp, login, refreshAccessToken, logout, getCurrentUser };
+
+/*
+@search user
+@Get request
+@params = userName, name
+*/
+
+const searchUser = async (c: Context) => {
+  try {
+    const query = c.req.query()
+    // console.log("this is query: ",query.search)
+    if (query.search == "") {
+      return c.json({ message: "search feild empty"}, statusCodes.INVALID);
+    }
+    const users = await UserModel.find({
+      $or: [
+        { name: { $regex: query.search, $options: "i" } },
+        { username: { $regex: query.search, $options: "i" } },
+      ],
+    }).select("name username profileImg _id");
+
+    if (users.length === 0) {
+      return c.json({message: "user not found"}, statusCodes.NOT_FOUND)
+    }
+
+    return c.json({ message: "success", users });
+  } catch (error) {
+    console.log(error);
+    return c.json({ error: error });
+  }
+};
+export {
+  signUp,
+  login,
+  refreshAccessToken,
+  logout,
+  getCurrentUser,
+  searchUser,
+};

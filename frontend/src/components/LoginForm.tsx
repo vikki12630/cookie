@@ -35,7 +35,7 @@ const LoginForm: FC<LoginFormProps> = ({onSubmit}) => {
   }
 
   return (
-    <form onSubmit={loginFormSubmit} className="flex flex-col gap-3">
+    <form onSubmit={loginFormSubmit} className="flex flex-col gap-3 text-gray-950">
       <label htmlFor="identifier" className="hidden" />
       <input
         type="text"

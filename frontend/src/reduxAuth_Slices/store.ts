@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import userReducer from "./userSlice"
+import userReducer from "./userSlice";
+import loadingReducer from "./loadingSlice";
+
 export const store = configureStore({
   reducer: {
-    user: userReducer
+    user: userReducer,
+    loading: loadingReducer,
   },
 });
 
