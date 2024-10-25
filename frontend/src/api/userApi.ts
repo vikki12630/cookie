@@ -1,8 +1,9 @@
 import axios from "./axiosInstance";
-import  { AxiosInstance } from "axios";
+import { AxiosInstance } from "axios";
 import { NavigateFunction } from "react-router-dom";
 import { AppDispatch } from "../reduxAuth_Slices/store";
 import { setLoadingPageReload } from "../reduxAuth_Slices/loadingSlice";
+import { setSearchUsers } from "../reduxAuth_Slices/userSearch";
 import {
   logout,
   setAccessToken,
@@ -92,17 +93,39 @@ const handleLogout = async (
 @get request
 */
 
-const searchUser = async (axiosPrivate: AxiosInstance, searchInput: string) => {
+const searchUser = async (
+  axiosPrivate: AxiosInstance,
+  searchInput: string,
+  dispatch: AppDispatch
+) => {
   try {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     console.log(searchInput);
     const response = await axiosPrivate.get(
       `/user/searchuser?search=${searchInput}`
     );
-    console.log(response);
+    const data = response.data.users;
+    dispatch(setSearchUsers(data));
   } catch (error) {
     console.log(error);
   }
 };
 
-export { handleLogin, getCurrentUser, handleLogout, searchUser };
+const getUser = async (
+  axiosPrivate: AxiosInstance,
+  userId: string
+) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const response = await axiosPrivate.get(
+      `/user/getuser?user=${userId}`
+    );
+    // console.log("first",response)
+    return response.data.user;
+  } catch (error) {
+    console.log(error);
+  }
+ 
+};
+
+export { handleLogin, getCurrentUser, handleLogout, searchUser, getUser };

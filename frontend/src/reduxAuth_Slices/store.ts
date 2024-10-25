@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import userReducer from "./userSlice";
 import loadingReducer from "./loadingSlice";
+import searchReducer from "./userSearch";
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     loading: loadingReducer,
+    search: searchReducer,
   },
 });
 

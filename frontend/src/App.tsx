@@ -10,6 +10,8 @@ import SignUp from "./pages/SignUp";
 import AuthLayout from "./layout/AuthLayout";
 import Home from "./pages/Home";
 import Settings from "./pages/Settings";
+import ProfilePage from "./pages/ProfilePage";
+import Search from "./pages/Search";
 
 function App() {
   const axiosPrivate = useAxiosPrivate();
@@ -26,6 +28,8 @@ function App() {
         <Route element={<AuthLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="settings" element={<Settings />} />
+          <Route path="profile/:userId" element={<ProfilePage />} />
+          <Route path="search" element={<Search />} />
         </Route>
       </Route>
     </Routes>

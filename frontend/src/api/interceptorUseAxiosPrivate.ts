@@ -49,7 +49,7 @@ const useAxiosPrivate = () => {
         previousRequest._retry = true;
         try {
           const newAccessToken = await refresh();
-          // console.log(newAccessToken);
+          console.log(newAccessToken);
           previousRequest.headers.Authorization = `Bearer ${newAccessToken?.data.accessToken}`
           return axiosPrivate(previousRequest)
         } catch (error) {

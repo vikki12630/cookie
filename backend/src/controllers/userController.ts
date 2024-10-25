@@ -273,7 +273,7 @@ const searchUser = async (c: Context) => {
   try {
     const query = c.req.query()
     // console.log("this is query: ",query.search)
-    if (query.search == "") {
+    if (query.search === "") {
       return c.json({ message: "search feild empty"}, statusCodes.INVALID);
     }
     const users = await UserModel.find({
@@ -293,6 +293,30 @@ const searchUser = async (c: Context) => {
     return c.json({ error: error });
   }
 };
+/* 
+getting other user
+*/
+const getUser = async(c:Context) => {
+  try {
+    const query = c.req.query()
+
+     if (query.search === "") {
+       return c.json({ message: "query feild empty" }, statusCodes.INVALID);
+     }
+
+     const user = await UserModel.findById(query.user).select("-password -createdAt -updatedAt")
+
+     if (!user) {
+      return c.json({ message: "user not found" }, statusCodes.NOT_FOUND);
+     }
+     return c.json({ message: "success", user });
+  } catch (error) {
+    return c.json({ error: error });
+  }
+}
+
+
+// 
 export {
   signUp,
   login,
@@ -300,4 +324,5 @@ export {
   logout,
   getCurrentUser,
   searchUser,
+  getUser,
 };

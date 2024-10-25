@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import {
   getCurrentUser,
+  getUser,
   login,
   logout,
   refreshAccessToken,
@@ -19,5 +20,6 @@ userRoutes.get("/refreshaccesstoken", refreshAccessToken);
 userRoutes.post("/logout", bearerAuth, logout);
 userRoutes.get("/getcurrentuser", bearerAuth, getCurrentUser);
 userRoutes.get("/searchuser", bearerAuth, searchUser);
+userRoutes.get("/getuser", bearerAuth, getUser);
 
 export default userRoutes;
