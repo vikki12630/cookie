@@ -1,4 +1,4 @@
-import LoginForm from "../components/LoginForm";
+import LoginForm from "../components/userComponents/LoginForm";
 import { handleLogin } from "../api/userApi";
 import { useAppDispatch } from "../reduxAuth_Slices/store";
 import { useNavigate } from "react-router-dom";

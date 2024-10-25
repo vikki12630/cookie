@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import useAxiosPrivate from "../api/interceptorUseAxiosPrivate";
-import { searchUser } from "../api/userApi";
+import useAxiosPrivate from "../../api/interceptorUseAxiosPrivate";
+import { searchUser } from "../../api/userApi";
 
 const UserSearch = () => {
   const axiosPrivate = useAxiosPrivate()
@@ -25,7 +25,7 @@ const UserSearch = () => {
    if (debouncedInput) {
      searchUser(axiosPrivate, debouncedInput); 
    }
- }, [debouncedInput]);
+ }, [debouncedInput, axiosPrivate]);
 
 
 

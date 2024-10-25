@@ -69,6 +69,11 @@ const getCurrentUser = async (
   }
 };
 
+/* 
+@user logout
+@post request
+*/
+
 const handleLogout = async (
   axiosPrivate: AxiosInstance,
   dispatch: AppDispatch
