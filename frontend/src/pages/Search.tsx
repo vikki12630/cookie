@@ -8,7 +8,9 @@ import { Link } from "react-router-dom";
 
 const Search = () => {
   const dispatch = useAppDispatch();
+  const currentUser = useAppSelector((data) => data.user.userData);
   const searchedUser = useAppSelector((data) => data.search.searchedUsers);
+  const otherUser = searchedUser?.filter((user) => user._id !== currentUser._id)
   const [searchInput, setSearchInput] = useState<string>("");
 
   const resetHandle = () => {
@@ -35,7 +37,7 @@ const Search = () => {
         </div>
         <div className=" w-3/5 items-start">
           <ul className="flex flex-col gap-4">
-            {searchedUser?.map((user) => (
+            {otherUser?.map((user) => (
               <li key={user._id} className="">
                 <Link
                   to={`/profile/${user._id}`}

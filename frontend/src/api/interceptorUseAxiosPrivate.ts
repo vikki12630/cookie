@@ -20,7 +20,7 @@ const useAxiosPrivate = () => {
     const token = response?.data.accessToken;
 
     dispatch(setAccessToken(token));
-    return response;
+    return token;
   };
 
   axiosPrivate.interceptors.request.use(
@@ -50,7 +50,7 @@ const useAxiosPrivate = () => {
         try {
           const newAccessToken = await refresh();
           console.log(newAccessToken);
-          previousRequest.headers.Authorization = `Bearer ${newAccessToken?.data.accessToken}`
+          previousRequest.headers.Authorization = `Bearer ${newAccessToken}`
           return axiosPrivate(previousRequest)
         } catch (error) {
           console.error(error);
